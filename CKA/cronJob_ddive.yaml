@@ -1,0 +1,26 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: my-cron
+  namespace: default
+spec:
+  # Run every 5 minutes
+  schedule: */5 * * * *
+  concurrencyPolicy: Forbid
+  backoffLimit: 2
+  startingDeadlineSeconds: 600
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 1
+  suspend: false
+  jobTemplate:
+    spec:
+      activeDeadlineSeconds: 300
+      template:
+        metadata:
+          labels:
+            app: my-cron
+        spec:
+          activeDeadlineSeconds: 420
+          containers:
+          - name: cron
+            image: my-repo/cron:latest

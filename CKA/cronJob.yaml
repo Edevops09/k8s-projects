@@ -6,6 +6,7 @@ spec:
   schedule: "*/1 * * * *"
   jobTemplate:
     spec:
+      activeDeadlineSeconds: 22
       template:
         spec:
           containers:
@@ -17,4 +18,5 @@ spec:
             - -c
             - date; echo Hello from the Kubernetes cluster
           restartPolicy: OnFailure
+
 
