@@ -1,0 +1,20 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: periodic
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      activeDeadlineSeconds: 22
+      template:
+        spec:
+          containers:
+          - name: periodic
+            image: busybox
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/sh
+            - -c
+            - uname
+          restartPolicy: OnFailure
