@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: logger
+  name: logger
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logger
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: logger
+    spec:
+     containers:
+     - name: logger
+       image: busybox
+       args:
+       - /bin/sh
+       - -c
+       - while true; do date >> /var/log/input.log; sleep 5; done
+       volumeMounts:
+       - name: varlog
+         mountPath: /var/log
+     - name: fluentd
+       image: evolvecybertraining/fluentd:v1.8
+       volumeMounts:
+       - name: varlog
+         mountPath: /var/log
+       - name: config-volume
+         mountPath: /fluentd/etc
+     volumes:
+     - name: varlog
+       emptyDir: {}
+     - name: config-volume
+       configMap:
+         name: fluentd-configmap
