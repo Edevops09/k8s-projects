@@ -1,14 +1,19 @@
 apiVersion: v1
 kind: Pod
 metadata:
+  CreationTimestamp: null
   labels:
     run: app1
   name: app1
 spec:
   containers:
-  - image: evolvecybertraining/args-app:v1
-    name: app1cont
-    args:
+  - args:
     - -Q
     - --dep
     - test
+    image: evolvecybertraining/args-app:v1
+    name: app1cont
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
