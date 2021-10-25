@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: poller
+  name: poller
+  namespace: default
+spec:
+  containers:
+  - image: evolvecybertraining/poller-app:v1
+    imagePullPolicy: Always
+    name: poller
+    args:
+    - -h
+    - localhost
+    - -p
+    - "80"
+  - image: haproxy
+    name: ambassador-container
+    volumeMounts:
+      - name: config-volume
+        mountPath: /usr/local/etc/haproxy/haproxy.cfg
+  volumes:
+    - name: config-volume
+      configMap:
+        # Provide the name of the ConfigMap containing the files you want
+        # to add to the container
+        name: haproxy-config
