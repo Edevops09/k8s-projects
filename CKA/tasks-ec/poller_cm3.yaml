@@ -20,6 +20,10 @@ spec:
     volumeMounts:
       - name: config-volume
         mountPath: /usr/local/etc/haproxy/
+    ports:
+    - containerPort: 80
+      name: http
+      protocl: TCP
   volumes:
     - name: config-volume
       configMap:
