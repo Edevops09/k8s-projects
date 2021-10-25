@@ -19,7 +19,7 @@ spec:
     name: ambassador-container
     volumeMounts:
       - name: config-volume
-        mountPath: /usr/local/etc/haproxy/haproxy.cfg
+        mountPath: /usr/local/etc/haproxy/
   volumes:
     - name: config-volume
       configMap:
