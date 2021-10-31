@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: probe-app
+  name: probe-app
+spec:
+  containers:
+  - image: nginx
+    name: probe-app
+    livenessProbe:
+      httpGet:
+        path: /healthz
+        port: 8080
+      initialDelaySeconds: 15
+      periodSeconds: 15
+    readinessProbe:
+      httpGet:
+        path: /started
+        port: 8080
+      initialDelaySeconds: 15
+      periodSeconds: 15
