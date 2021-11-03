@@ -1,0 +1,17 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: "2021-10-24T04:18:54Z"
+    name: default
+    namespace: prime
+    resourceVersion: "2285"
+    selfLink: /api/v1/namespaces/prime/serviceaccounts/default
+    uid: b938cc55-aec9-4426-a829-f1c1a592d44d
+  secrets:
+  - name: default-token-t4xxw
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""
