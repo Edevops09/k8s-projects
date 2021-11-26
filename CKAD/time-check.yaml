@@ -1,0 +1,25 @@
+piVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: time-check
+  name: time-check
+  namespace: dvl1987
+spec:
+  containers:
+  - image: busybox
+    name: time-check
+    command: ["bin/sh", "-c", "while true; do date; sleep $TIME_FREQ;done >> /opt/time/time-check.log"]
+    volumeMounts:
+    - mountPath: /opt/time
+      name: cache-volume
+    env:
+    - name: SPECIAL_LEVEL_KEY
+      valueFrom:
+        configMapKeyRef:
+          name: time-config
+          key: TIME_FREQ
+  volumes:
+  - name: cache-volume
+    emptyDir: {}
+
